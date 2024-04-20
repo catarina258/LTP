@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avaliação Docente</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='cursos.css') }}">
+</head>
+<body>
+    <header>
+        <div class="back">
+            <a href='/'><button>Voltar</button></a>        
+        </div>
+         <h1>AVALIAÇÃO DOCENTE</h1>
+         <p>IFTO - Instituto Federal do Tocantins</p>
+    </header>
+   <main>
+        <ul>
+            {% for nivel, cursos in cursos_por_nivel.items() %}
+                <li class="title">Nível: Ensino {{ nivel }}</li>
+                <ul>
+                    {% for curso in cursos %}                
+                        <li class="bloco">
+                            <form action="{{ url_for('materias', curso_titulo=curso.Titulo) }}" method="post">
+                                <input type="hidden" name="id_curso" value="{{ curso.IDCurso }}">
+                                <button type="submit">
+                                    {{ curso.Titulo }}
+                                </button>
+                            </form>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endfor %}
+        </ul>
+    </main>
+</body>
+</html>
+
+
+
